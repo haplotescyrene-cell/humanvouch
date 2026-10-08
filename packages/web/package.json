@@ -7,6 +7,7 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "test": "vitest run",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -16,6 +17,10 @@
     "snarkjs": "^0.7.5"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.13.0"
+    "@nuxtjs/tailwindcss": "^6.13.0",
+    "@vue/compiler-sfc": "3.5.39",
+    "@vue/server-renderer": "3.5.39",
+    "vitest": "^4.0.18",
+    "vue": "3.5.39"
   }
 }
