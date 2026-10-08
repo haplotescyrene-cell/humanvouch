@@ -1196,8 +1196,12 @@ __metadata:
     "@creit.tech/stellar-wallets-kit": "npm:^1.7.3"
     "@nuxtjs/tailwindcss": "npm:^6.13.0"
     "@stellar/stellar-sdk": "npm:^16.0.1"
+    "@vue/compiler-sfc": "npm:3.5.39"
+    esbuild: "npm:0.28.1"
     nuxt: "npm:^3.16.0"
     snarkjs: "npm:^0.7.5"
+    vitest: "npm:^4.0.18"
+    vue: "npm:3.5.39"
   languageName: unknown
   linkType: soft
 
@@ -7467,7 +7471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.27.0 || ^0.28.0, esbuild@npm:^0.28.0":
+"esbuild@npm:0.28.1, esbuild@npm:^0.27.0 || ^0.28.0, esbuild@npm:^0.28.0":
   version: 0.28.1
   resolution: "esbuild@npm:0.28.1"
   dependencies:
@@ -13922,7 +13926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.5.34":
+"vue@npm:3.5.39, vue@npm:^3.5.34":
   version: 3.5.39
   resolution: "vue@npm:3.5.39"
   dependencies:
