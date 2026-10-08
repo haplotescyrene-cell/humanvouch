@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  circuits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Enable Corepack
+        run: corepack enable
+      # Corepack must be available before setup-node discovers Yarn's cache.
+      - name: Restore Yarn cache
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: yarn
+      - run: yarn install --immutable
+      - name: Install Circom 2.2.3
+        run: |
+          mkdir -p "$RUNNER_TEMP/circom-bin"
+          curl --fail --location --silent --show-error \
+            https://github.com/iden3/circom/releases/download/v2.2.3/circom-linux-amd64 \
+            --output "$RUNNER_TEMP/circom-bin/circom"
+          printf '%s  %s\n' \
+            '85342c7ff332d948df7c0c50ecf201e6129349aef550ce873f3c811b79fe53a3' \
+            "$RUNNER_TEMP/circom-bin/circom" | sha256sum --check --status
+          chmod +x "$RUNNER_TEMP/circom-bin/circom"
+          echo "$RUNNER_TEMP/circom-bin" >> "$GITHUB_PATH"
+      - name: Test circuits
+        run: yarn workspace @humanvouch/circuits test
