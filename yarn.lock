@@ -1198,6 +1198,7 @@ __metadata:
     "@stellar/stellar-sdk": "npm:^16.0.1"
     nuxt: "npm:^3.16.0"
     snarkjs: "npm:^0.7.5"
+    vitest: "npm:^4.0.18"
   languageName: unknown
   linkType: soft
 
