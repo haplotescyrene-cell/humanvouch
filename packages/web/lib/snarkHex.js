@@ -64,7 +64,12 @@ export function publicSignalsToHex(publicSignals) {
 }
 
 export function cleanHex(value) {
-  return value.trim().toLowerCase().replace(/^0x/, "").replace(/\s+/g, "");
+  const clean = value.trim().toLowerCase().replace(/^0x/, "").replace(/\s+/g, "");
+  const invalid = clean.match(/[^0-9a-f]/u);
+  if (invalid) {
+    throw new Error(`Invalid hex character ${JSON.stringify(invalid[0])} at index ${invalid.index}`);
+  }
+  return clean;
 }
 
 export function hexToBytes(hex) {
