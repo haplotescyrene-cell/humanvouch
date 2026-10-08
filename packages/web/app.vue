@@ -99,7 +99,10 @@ async function openSharedVerification(hashField: string) {
       typeof localStorage !== "undefined" ? localStorage.getItem("hv_content_" + hashField) : null;
     shareView.value = { loading: false, hashField, count, content: stored };
   } catch (e: any) {
-    shareView.value = { loading: false, hashField, error: e.message };
+    shareView.value = {
+      loading: false, hashField,
+      error: e?.message || "Could not resolve this attestation. Please try again.",
+    };
   }
 }
 
@@ -231,8 +234,12 @@ async function runAgentQuery() {
 
       <!-- shared verification (opened from a /?v=… link pasted on X / Medium) -->
       <section v-if="shareView" class="border-b border-ink-600 bg-brass/5 px-6 py-7 sm:px-10">
-        <p class="eyebrow text-brass">Content credential · resolved on Stellar</p>
+        <p class="eyebrow text-brass">Content credential · Stellar verification</p>
         <p v-if="shareView.loading" class="mt-3 font-mono text-sm text-prussian-light">Resolving on-chain…</p>
+        <template v-else-if="shareView.error">
+          <p class="mt-3 text-lg text-oxblood">Verification unavailable</p>
+          <p role="alert" class="mt-2 font-mono text-sm text-oxblood">{{ shareView.error }}</p>
+        </template>
         <template v-else>
           <p class="mt-3 text-lg text-paper">
             <span v-if="shareView.count > 0" class="text-brass-light">✅ Human-Vouched</span>
